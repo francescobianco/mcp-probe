@@ -1,3 +1,9 @@
+# Auto-log: every test that sources assert.sh writes output to /tmp/mcp-probe-tests/<test>.log
+_MCP_PROBE_LOG_DIR="/tmp/mcp-probe-tests"
+mkdir -p "$_MCP_PROBE_LOG_DIR"
+_MCP_PROBE_LOG_FILE="$_MCP_PROBE_LOG_DIR/$(basename "$0" .sh).log"
+exec > >(tee "$_MCP_PROBE_LOG_FILE") 2>&1
+
 TESTS_PASSED=0
 TESTS_FAILED=0
 
